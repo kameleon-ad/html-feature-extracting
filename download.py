@@ -90,7 +90,9 @@ async def write_one(idx: int, content: str):
 def extract_filings(df: pd.DataFrame, req_queue: asyncio.Queue):
 
     def callback(row: pd.Series):
-        req_queue.put_nowait((row.name, row['linkToFilingDetails']))
+        link = row['linkToFilingDetails']
+        link = link.replace("https://www.sec.gov/ix?doc=/", "https://www.sec.gov/")
+        req_queue.put_nowait((row.name, link))
 
     df.apply(callback, axis=1)
 
