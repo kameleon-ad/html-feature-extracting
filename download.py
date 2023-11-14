@@ -82,7 +82,7 @@ async def fetch_html(url: str, session: ClientSession, **kwargs) -> str:
 
 
 async def write_one(idx: int, content: str):
-    filepath = HTML_OUTPUT / f'{idx: 07d}.html'
+    filepath = HTML_OUTPUT / f'{idx:07d}.html'
     async with aiofiles.open(filepath, "w") as fp:
         await fp.write(content)
 
